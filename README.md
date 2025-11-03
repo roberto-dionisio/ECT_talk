@@ -1,9 +1,6 @@
-# Strong Interactions need Strong Machines
+# Title (to-do)
 
-First time ever using the Reveal.js framework through Quarto for a presentation.
-It is just a preliminary benchtest.
+Quarto reveal.js framework for my talk in Multi-canonical methods and lattice field theory @ect in Trento.
 
-
-
-A live demo of the presentation is available [here](https://roberto-dionisio.github.io/PhD_seminar_quarto/quarto_PhD_seminar.html#/title-slide)
+A live demo of the presentation is available [here]() (to-be updated).
 
