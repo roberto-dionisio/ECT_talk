@@ -1,0 +1,58 @@
+---
+title: Strong Interactions need Strong Machines
+subtitle: The Lattice QCD approach
+format: 
+  metropolis-beamer-revealjs:
+    theme: style.scss
+header-logo: cherubino_white.png
+slide-number: "c"
+author:
+  - name: Roberto Dionisio
+    email: roberto.dionisio@phd.unipi.it
+    affiliations: Università di Pisa
+date: last-modified
+embed-resources: false
+header-includes:
+  - |
+    <script type="text/javascript">
+      window.MathJax = {
+        tex: {
+          packages: {'[+]': ['ams', 'color']},
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        loader: {
+          load: ['[tex]/color']
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+---
+
+
+
+
+## Why I choose Lattice QCD {auto-animate=true auto-animate-easing="ease-out"}
+
+
+::: {.r-vstack}
+::: {.r-hstack}
+::: {data-id="qft" class="fragment zoom-in" style="position:absolute; left:80px; top:60px;background: #b30f0fff; width:400px; height:400px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:450;text-align:center;"}
+Particle <br> Physics
+:::
+    
+::: {data-id="math" class="fragment zoom-in" style="background: #38aa12ff;position:absolute; right:80px; top:60px; width:300px; height:300px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:450; text-align:center;"}
+Applied <br>Math
+:::
+:::
+  
+::: {data-id="hpc" class="fragment zoom-in" style="background: #2141c1ff;position:absolute; bottom:220px; left:500px; width:200px; height:200px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:450;"}
+HPC
+:::
+:::
+
+---
