@@ -1,6 +1,6 @@
 ---
-title: Strong Interactions need Strong Machines
-subtitle: The Lattice QCD approach
+title: Boh
+subtitle: booooh
 format: 
   metropolis-beamer-revealjs:
     theme: style.scss
