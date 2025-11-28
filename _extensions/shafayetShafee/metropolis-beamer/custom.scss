@@ -155,9 +155,19 @@ $authors-block-gap: 4em !default;
   
   #title-slide .subtitle, 
   div.reveal div.slides section.quarto-title-block .subtitle {
-    margin-bottom: 1.5rem;
+    margin-bottom: -1rem;
   }
-  
+
+  #title-slide .workshop {
+  margin-left: 0px;
+  margin-top: 50px;
+  font-weight: 400;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 2.2rem;
+  font-style: italic;
+  color: #EB811B; // accent color
+}
+
   .slide-background.title-slide {
     background-color: $primary-color;
   }

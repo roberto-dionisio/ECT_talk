@@ -1,6 +1,6 @@
 ---
-title: Boh
-subtitle: booooh
+title: The QCD Sphaleron Rate
+subtitle: A First-Principles Determination from Inverse-Problem Techniques <br> <span class="workshop" style="display:block;text-align:left" >Multi-canonical methods and Lattice Field Theory</span>
 format: 
   metropolis-beamer-revealjs:
     theme: style.scss
@@ -12,6 +12,7 @@ author:
     affiliations: Università di Pisa
 date: last-modified
 embed-resources: false
+pdf-separate-fragments: false
 header-includes:
   - |
     <script type="text/javascript">
@@ -31,28 +32,1296 @@ header-includes:
       };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 ---
 
+## Outline
+
+<div style="position: relative; top: 4%; left: 0%">
+  <ol>
+    <li class="fragment" data-fragment-index="1" style="font-weight: 400">
+      Physics motivation
+      <ul>
+        <li class="fragment" data-fragment-index="2" style="font-weight: 300">What are sphaleron transitions? Why do we care?</li>
+      </ul>
+    </li>
+    <li class="fragment" data-fragment-index="3" style="font-weight: 400">
+      The inverse problem
+      <ul>
+        <li class="fragment" data-fragment-index="4" style="font-weight: 300">From Euclidean Correlators to Spectral functions</li>
+        <li class="fragment" data-fragment-index="4" style="font-weight: 300">Ill-posedness</li>
+      </ul>
+    </li>
+    <li class="fragment" data-fragment-index="5" style="font-weight: 400">
+      Mock data tests
+      <ul>
+        <li class="fragment" data-fragment-index="6" style="font-weight: 300">Instabilities & Regularization</li>
+      </ul>
+    </li>
+    <li class="fragment" data-fragment-index="7" style="font-weight: 400">
+      Algorithmic strategy
+      <ul>
+        <li class="fragment" data-fragment-index="8" style="font-weight: 300">Modified Backus–Gilbert (HLT)</li>
+      </ul>
+    </li>
+    <li class="fragment" data-fragment-index="9" style="font-weight: 400">
+      Lattice QCD calculation
+      <ul>
+        <li class="fragment" data-fragment-index="10" style="font-weight: 300"> Finite $\vec{p}~$ Correlators & Double Extrapolation</li>
+      </ul>
+    </li>
+    <li class="fragment" data-fragment-index="11" style="font-weight: 400">
+      Final results & outlook
+    </li>
+  </ol>
+</div>
+
+<div style="text-align:center; position:relative; bottom:-10%; right:-15%;transform-origin: top left; transform: scale(1.0) translate(10%, -50%) ; margin: auto;"> 
+<img src="lattice3d.svg" style="width:100%; height:auto; max-width:none; ">
+</div>
 
 
+## QCD Topology {auto-animate=true auto-animate-easing="ease-in-ease-out"}
+Full QCD Euclidean action:
 
-## Why I choose Lattice QCD {auto-animate=true auto-animate-easing="ease-out"}
+::: {class="fragment"}
+$$S_{\text{QCD}} =
+\int d^4x~ 
+\frac{1}{2g^2} \mathrm{Tr} \left[G_{\mu\nu}(x) G_{\mu\nu}(x)\right]
++ \int d^4x~\sum_f \bar{\psi}_f(x) (\gamma_\mu D_\mu + m_f)\psi_f(x)
+\;+\;
+ \theta Q $$
+:::
+
+## QCD Topology {auto-animate=true auto-animate-easing="ease-in-ease-out"}
+Full QCD Euclidean action:
+
+::: {.class}
+$$S_{\text{QCD}} =
+\int d^4x~ 
+\frac{1}{2g^2} \mathrm{Tr} \left[G_{\mu\nu}(x) G_{\mu\nu}(x)\right]
++ \int d^4x~\sum_f \bar{\psi}_f(x) (\gamma_\mu D_\mu + m_f)\psi_f(x)
+\;+\;
+ \textcolor{#EB811B}{\theta Q} $$
+:::
+
+::: {class="fragment"}
+The θ-term couples to the **topological charge**:
+
+::: {.class style="text-align:center;"}
+$$
+Q = \frac{1}{32\pi^2} \int d^4x~ 
+\varepsilon_{\mu\nu\rho\sigma} \,
+\text{Tr}[G_{\mu\nu} G_{\rho\sigma}]
+$$
+:::
+:::
+
+::: {class="fragment"}
+- In the continuum: $ Q $ in $\mathbb{Z}$  
+- Each integer labels a distinct **topological sector**
+:::
 
 
-::: {.r-vstack}
-::: {.r-hstack}
-::: {data-id="qft" class="fragment zoom-in" style="position:absolute; left:80px; top:60px;background: #b30f0fff; width:400px; height:400px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:450;text-align:center;"}
-Particle <br> Physics
+<!--
+::: {class="fragment" style="margin-top:-0px;"}
+- No trivial Topology → **Rich** Phenomenology:
+  - Witten Veneziano mechanism and $\eta^\prime$ mass
+  - Strong-CP problem
+  - Topology at large $N$
+
+  ::: {class="fragment" style="margin-top:-0px;"}
+  -  Topological Transitions → [**Sphalerons**]{style="color: #EB811B;"}
+  ::: 
+
+:::
+-->
+
+::: {class="fragment" style="font-size:1.0em; font-style:italic; color:gray; margin-top:30px; margin-left:38%; text-align:left;"}
+  Topological sectors are separated by **energy barriers** <br>
+  *transitions between vacua are rare but physically important*
+:::
+## Why QCD topology matters {auto-animate=true }
+
+::: {class="fragment"}
+- Different $Q$-sectors correspond to **distinct vacua** with non-trivial topological structure
+:::
+
+::: {class="fragment" style="text-align:center; margin-top:-90px;"}
+
+<img src="potential_plot.png"  data-id="pot" style="width:100%; margin-top:20px;"/>
+
+:::
+
+
+## Why QCD topology matters {auto-animate=true auto-animate-duration=0.5}
+
+
+- Different $Q$-sectors correspond to **distinct vacua** with non-trivial topological structure
+
+::: {class="fragment" style="margin-top:-10px"}
+- Topology underlies key QCD phenomena:
+  - Witten–Veneziano mechanism → $m_{\eta'~}$
+  - Strong-CP problem ($\theta$-term)
+  - Topological susceptibility in QCD thermodynamics
+:::
+
+::: {.fragment style="margin-top:-10px; font-size=0em;"}
+<div style="font-size:0.1em"> . 
+</div>                                                                          
+:::
+::: { style="text-align:center;  margin-top:-70px;"}
+<img src="potential_plot.png" data-id="pot" style="width:100%;"/>
+:::
+
+::: {class="fragment" style="font-size:1.0em; font-style:italic; color:gray; margin-top:-10px; margin-left:48%; text-align:left;"}
+Understanding QCD topology is essential<br> for [**hadron physics**]{style="color: #EB811B;"} and [**finite-temperature QCD**]{style="color: #EB811B;"}.
+:::
+
+## The QCD Sphaleron Rate {auto-animate=true}
+
+::: columns
+::: column 
+:::{class="fragment"}
+<div style="text-align:center;">
+[σφαλερός]{style="font-weight:450;"} *(sphalerós)*
+</div>
+
+<div style="text-align:center; font-size: 22px; font-style: italic">
+  <ol>
+    <li class=""> **slippery**, likely to make one stumble</li>
+    <li class="">ready to fall</li>
+  </ol>
+</div>
+
+:::
+
+:::
+
+::: column 
+::: {class="fragment"}
+<div style="text-align:center; ">
+[Sphaleron Rate:]{style="font-weight:450;"}
+</div>
+
+
+<div style="text-align:center; font-size: 22px; font-style: italic">
+Rate of [real time]{style="font-weight:450;"} thermal transitions above sphaleron barriers separating topologically-inequivalent QCD vacua
+</div>
+
+:::
+
+:::
+
+:::
+
+<img src="potential_plot.png"  data-fragment-index="1" style="width:100%; margin-top:10px; display:block;"/>
+
+
+## The QCD Sphaleron Rate
+
+::: columns
+::: column 
+:::{class=""}
+<div style="text-align:center;">
+[σφαλερός]{style="font-weight:450;"} *(sphalerós)*
+</div>
+
+<div style="text-align:center; font-size: 22px; font-style: italic">
+  <ol>
+    <li class=""> **slippery**, likely to make one stumble</li>
+    <li class="">ready to fall</li>
+  </ol>
+</div>
+
+:::
+
+:::
+
+::: column 
+::: {class=""}
+<div style="text-align:center; ">
+[Sphaleron Rate:]{style="font-weight:450;"}
+</div>
+
+
+<div style="text-align:center; font-size: 22px; font-style: italic">
+Rate of [real time]{style="font-weight:450;"} thermal transitions above sphaleron barriers separating topologically-inequivalent QCD vacua
+</div>
+
+:::
+
+:::
+
+:::
+
+<img src="potential_plotsph.png"  data-fragment-index="1" style="width:100%; margin-top:10px; display:block;"/>
+
+
+## The QCD Sphaleron Rate {auto-animate=true}
+
+::: columns
+::: column 
+:::{class=""}
+<div style="text-align:center;">
+[σφαλερός]{style="font-weight:450;"} *(sphalerós)*
+</div>
+
+<div style="text-align:center; font-size: 22px; font-style: italic">
+  <ol>
+    <li class=""> **slippery**, likely to make one stumble</li>
+    <li class="">ready to fall</li>
+  </ol>
+</div>
+
+:::
+
+:::
+
+::: column 
+::: {data-id="def"}
+<div style="text-align:center; ">
+[Sphaleron Rate:]{style="font-weight:450;"}
+</div>
+
+
+<div style="text-align:center; font-size: 22px; font-style: italic">
+Rate of [real time]{style="font-weight:450;"} thermal transitions above sphaleron barriers separating topologically-inequivalent QCD vacua
+</div>
+
+:::
+
+:::
+
+:::
+
+<img src="potential_plotsph_1.png"  data-fragment-index="1" style="width:100%; margin-top:10px; display:block;"/>
+
+## The QCD Sphaleron Rate {auto-animate=true}
+::: columns
+::: column 
+::: {data-id="def"}
+<div style="text-align:center; ">
+[Sphaleron Rate:]{style="font-weight:450;"}
+</div>
+
+
+<div style="text-align:center; font-size: 22px; font-style: italic">
+Rate of [real time]{style="font-weight:450;"} thermal transitions above sphaleron barriers separating topologically-inequivalent QCD vacua
+</div>
+
+:::
+
+:::
+
+::: column 
+
+:::{class="fragment"}
+$$
+\Gamma_{\mathrm{sphal}} \equiv \int dt d^3x ~\langle q(\vec{x},t) q(\vec{0},0)\rangle _T
+$$
+:::
+
+:::{class="fragment"}
+$$
+\langle \mathcal{O} \rangle _T = \frac{1}{\mathrm{Tr}\{ e^{-\mathcal{H}/T} \}} \mathrm{Tr}\{e^{- \mathcal{H}/T} \mathcal{O}\}
+$$
+:::
+
+:::
+
+:::
+
+<img src="potential_plotsph_1.png"  data-fragment-index="1" style="width:100%; margin-top:-50px; display:block;"/>
+
+::: {class="fragment fade-up" style="font-size:1.0em; font-style:italic; color:gray; margin-top:-10px; margin-left:68%; text-align:left; font-size: 1.7rem"  }
+[**Why do we care?**]{style="color: #EB811B; font-size:1.9rem"}
+:::
+
+## 1) Chiral Magnetic Effect {auto-animate=true}
+Early stage of the Universe ($\small 10^{-6}\mathrm{s}$) → Quark-Gluon plasma 
+
+::: {.r-hstack style="transform: translateX(-200px) translateY(100px)"}
+::: {data-id="left" class="fragment zoom-in" data-fragment-index="2" style="background: #0d3d96ff; width:200px; height:200px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:350;text-align:center; flex-direction: column; margin-right:60px;"}
+<div>
+  <span style="position:relative; left:-40px; font-size:1rem;">Spin</span>
+  <span style="position:relative; left:-50px; font-size:2rem;">↑</span>
+</div>
+<div>
+  <span style="position:relative; left:38px; top:-50px; font-size:2rem;">↓</span>
+  <span style="position:relative; left:34px; top:-50px; font-size:1rem;">Momentum</span>
+</div>
+<div style="font-size:1.5rem; margin-top:-40px; font-weight:600">Left-Handed</div>
 :::
     
-::: {data-id="math" class="fragment zoom-in" style="background: #38aa12ff;position:absolute; right:80px; top:60px; width:300px; height:300px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:450; text-align:center;"}
-Applied <br>Math
-:::
-:::
-  
-::: {data-id="hpc" class="fragment zoom-in" style="background: #2141c1ff;position:absolute; bottom:220px; left:500px; width:200px; height:200px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:450;"}
-HPC
+::: {data-id="right" class="fragment zoom-in" data-fragment-index="3" style="background: #af1212ff; width:200px; height:200px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:350; text-align:center; flex-direction: column;"}
+<div>
+  <span style="position:relative; left:-40px; font-size:1rem;">Spin</span>
+  <span style="position:relative; left:-50px; font-size:2rem;">↑</span>
+</div>
+<div>
+  <span style="position:relative; left:38px; top:-50px; font-size:2rem;">↑</span>
+  <span style="position:relative; left:34px; top:-50px; font-size:1rem;">Momentum</span>
+</div>
+<div style="font-size:1.5rem; margin-top:-40px; font-weight:600">Right-Handed</div>
+
 :::
 :::
 
+<div style="text-align:right; margin-top:-160px; margin-left:600px;font-size:0.85em">
+
+<ul>
+    <li class="fragment" data-fragment-index="1">
+      <strong>Helicity/Chirality </strong> in the $\small m_q \to 0$ <br>
+      $$\small \hat{h} = \frac{\vec{s} \cdot \vec{p}}{|\vec{p}|} $$
+    </li>
+            
+  <li class="fragment fade-in-then-semi-out" data-fragment-index="2">
+      <strong>Left-Handed ($L$):</strong> <br>
+      Spin is <em>anti-parallel</em> to momentum.
+      $$ \hat{h}\psi_L = -1\psi_L $$
+    </li>
+
+  <li class="fragment fade-in-then-semi-out" data-fragment-index="3">
+      <strong>Right-Handed ($R$):</strong> <br>
+      Spin is <em>parallel</em> to momentum.
+      $$ \hat{h}\psi_R = +1\psi_R $$
+    </li>
+  </ul>
+</div>
+
+::: {class="fragment fade-up" style="font-size:1em; font-style:italic; color:gray; margin-top:-10px; margin-left:47%; text-align:left; font-weight:400px;"  }
+[Sphaleron transitions]{style="color: #EB811B;"} can change [topology]{style="color: #EB811B; "},<br> generating an axial charge density $N_5$.
+:::
+
+## 1) Chiral Magnetic Effect {auto-animate=true }
+Early stage of the Universe ($\small 10^{-6}\mathrm{s}$) → Quark-Gluon plasma 
+
+::: {.r-hstack style="transform: translateX(-200px) translateY(100px)"}
+::: {data-id="left" style="background: #0d3d96ff; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:350;text-align:center; flex-direction: column; margin-right:60px;"}
+
+:::
+    
+::: {data-id="right" style="background: #af1212ff; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:350; text-align:center; flex-direction: column;"}
+
+:::
+:::
+
+
+::: columns
+
+::: {.column width="50%"}
+<div style="transform: scale(0.65); transform-origin: top left; position:relative; width:600px; height:600px; margin-top: 20px; border: 1px dashed gray; border-radius: 15px;">
+
+  <div data-id="p1" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:80px; top:80px;"></div>
+  <div data-id="p2" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:150px; top:400px;"></div>
+  <div data-id="p3" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:350px; top:150px;"></div>
+  <div data-id="p4" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:480px; top:450px;"></div>
+  
+  <div data-id="p9" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:380px; top:80px;"></div>
+  <div data-id="p10" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:50px; top:500px;"></div>
+  <div data-id="p11" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:550px; top:350px;"></div>
+
+  <div data-id="p5" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:120px; top:300px;"></div>
+  <div data-id="p6" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:280px; top:60px;"></div>
+  <div data-id="p7" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:450px; top:250px;"></div>
+  <div data-id="p8" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:250px; top:320px;"></div>
+  
+  <div data-id="p12" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:400px; top:500px;"></div>
+  <div data-id="p13" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:20px; top:200px;"></div>
+  <div data-id="p14" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:300px; top:250px;"></div>
+</div>
+
+:::
+
+::: {.column width="50%"}
+
+::: {class="fragment" style="margin-top: 0px ;margin-left:-50px; font-size: 0.85em;"}
+1. At $T \gg T_c$ (${\sim}155$ MeV)→ **Deconfinement**
+ <!--quarks and gluons are the relevant degrees of freedom (Asymptotic Freedom).-->
+
+:::
+
+::: {class="fragment" style="margin-top: 0px;margin-left:-50px;font-size: 0.85em;"}
+2. QCD interactions are vector-like<br> 
+<span style="font-size:0.9em; color:#888">preserve CP globally at $\small \theta=0$</span>
+
+$$\underbrace{\langle N_L-N_R }_{\color{#EB811B}\large N_5}\rangle=0$$
+
+<!--at equilibrium -->
+:::
+
+::: {class="fragment" style="margin-top: 0px; margin-left:-50px; font-size: 0.85em;"}
+3. **But** topology can induce local imbalance: <br>
+  <span style="font-size:0.9em; color:#888">via Atiyah-Singer Index Theorem</span>
+
+  $$ Q = \int d^4x \, q(x) = N_L - N_R \equiv N_5$$
+  <div style="margin-top:10px; font-size:0.9em; color:#af1212ff">
+  $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\Rightarrow$ Fluctuations of $Q$ drive $N_5 \neq 0$
+  </div>
+:::
+
+:::
+:::
+
+
+## 1) Chiral Magnetic Effect {auto-animate=true }
+<style>
+  /* FIX: We use width/height/margin for the bounce 
+     instead of 'transform: scale'.
+     This prevents conflicts with Reveal.js positioning.
+     
+     Base size: 30px.
+     Peak size (1.6x): 48px.
+     Margin offset at peak: -(48px - 30px) / 2 = -9px.
+  */
+  @keyframes bounce-flip-safe {
+    0% {
+      width: 30px;
+      height: 30px;
+      margin: 0px;
+      background-color: #af1212ff; /* Start Red */
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+    40% {
+      width: 48px;        /* 30 * 1.6 */
+      height: 48px;
+      margin: -9px;       /* Keep centered as it grows */
+      background-color: #EB811B; 
+      box-shadow: 0 0 30px #EB811B;
+      z-index: 100;
+    }
+    100% {
+      width: 30px;
+      height: 30px;
+      margin: 0px;
+      background-color: #0d3d96ff; /* End Blue */
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+  }
+
+  /* Trigger animation when slide is present */
+  section.present .flipping {
+    animation: bounce-flip-safe 1.5s ease-in-out;
+  }
+</style>
+Sphaleron Transition occurs! ($N_R \to N_L$)
+
+::: {.r-hstack style="transform: translateX(-200px) translateY(100px)"}
+::: {data-id="left" style="background: #0d3d96ff; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:350;text-align:center; flex-direction: column; margin-right:60px;"}
+
+:::
+    
+::: {data-id="right" style="background: #af1212ff; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:350; text-align:center; flex-direction: column;"}
+
+:::
+:::
+::: columns
+
+::: {.column width="50%"}
+
+
+<div data-id="box" style="transform: scale(0.65); transform-origin: top left; position:relative; width:600px; height:600px; margin-top: 20px; border: 2px dashed #EB811B; border-radius: 15px; box-shadow: 0 0 15px rgba(235,129,27,0.2);">
+
+<div data-id="p1" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:80px; top:80px; transition: background 1s;"></div>
+  <div data-id="p2" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:150px; top:400px;"></div>
+  <div data-id="p3" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:350px; top:150px; transition: background 1s;"></div>
+  <div data-id="p4" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:480px; top:450px;"></div>
+  <div data-id="p9" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:380px; top:80px; transition: background 1s;"></div>
+  <div data-id="p10" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:50px; top:500px;"></div>
+  <div data-id="p11" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:550px; top:350px;"></div>
+  <div data-id="p6" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:280px; top:60px;"></div>
+  <div data-id="p13" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:20px; top:200px;"></div>
+  
+  <div data-id="p12" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:400px; top:500px;"></div>
+
+  <div   class="flipping" style="width:30px; height:30px; border-radius:50%; position:absolute; left:120px; top:300px;background-color: #0d3d96ff;"></div>
+  
+  <div  class="flipping" style="width:30px; height:30px; border-radius:50%; position:absolute; left:450px; top:250px; background-color: #0d3d96ff;"></div>
+  <div  class="flipping" style="width:30px; height:30px; border-radius:50%; position:absolute; left:250px; top:320px; background-color: #0d3d96ff;"></div>
+  <div  class="flipping" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:300px; top:250px;"></div>
+
+</div>
+
+:::
+
+::: {.column width="50%"}
+
+::: {class="fragment" style="margin-top: -40px ;margin-left:-50px; font-size: 0.85em;text-align:center;"}
+<strong>Finite Sphaleron Rate</strong> ($\Gamma_{\text{sphal}} \neq 0$)
+
+:::
+
+::: {class="fragment" style="margin-top: -10px;margin-left:-50px;font-size: 0.85em; text-align:center;"}
+↓
+:::
+
+::: {class="fragment" style="margin-top: -10px;margin-left:-50px;font-size: 0.85em; text-align:center;"}
+<strong>Barrier Crossing:</strong> <br>
+      Thermal fluctuations overcome the energy barrier separating distinct topological vacua.
+:::
+
+::: {class="fragment" style="margin-top: 30px; margin-left:-50px; font-size: 0.85em;"}
+<strong>The Anomaly:</strong> <br>
+      Transitions change  $Q$, driving axial charge via:
+      $$ \partial_\mu j^\mu_5 = 2N_f \underbrace{\frac{g^2}{32\pi^2} G_{\mu\nu}\tilde{G}^{\mu\nu}}_{q(x)} $$
+<!-- \Delta N_5 = 2N_f\, \Delta Q_{\text{top}}.-->
+:::
+
+::: {class="fragment" style="margin-top: -20px; margin-left:-50px; font-size: 0.85em;"}
+<strong>Result:</strong> <br>
+      Creation of local <strong>Chiral Imbalance</strong>:
+      
+$$\Delta Q \neq 0 \Rightarrow \Delta N_5 \neq 0 \Rightarrow \mathrm{e.g.}~~ N_L > N_R $$
+      
+
+:::
+
+
+
+
+:::
+
+:::
+
+## 1) Chiral Magnetic Effect {auto-animate=true}
+
+Magnetic Field $\vec{B}$ + Imbalance $\to$ Electric Current $\vec{J}$
+
+:::columns
+::: {.column width="50%"}
+<div style="transform: scale(0.65) translateY(18px); transform-origin: top left; position:relative; width:600px; height:600px; margin-top: 20px; border: 2px dashed #EB811B; border-radius: 15px; box-shadow: 0 0 15px rgba(235,129,27,0.2);">
+  
+  <div class="" data-fragment-index="1" style="position:absolute; left: -90px; top: 110px; display:flex; flex-direction:column; align-items:center;">
+      
+  <div style="font-size: 2em; color: gray; font-weight:bold; margin-bottom: -10px;">$\vec{B}$</div>
+
+  <svg width="40" height="350" viewBox="0 0 40 350" style="overflow: visible;"><defs><marker id="arrowhead-gray" markerWidth="8" markerHeight="7" 
+                  refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="gray" /></marker></defs><line x1="20" y1="350" x2="20" y2="5" 
+              stroke="gray" stroke-width="3" 
+              marker-end="url(#arrowhead-gray)" /></svg>
+  </div>
+
+  <div data-id="p1" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:80px; top:550px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="right" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:540px; top:20px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="left" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:420px; top:450px; opacity:0.8; transition: top 2s ease;"></div>
+
+  <div data-id="p2" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:150px; top:520px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p3" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:350px; top:560px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p4" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:480px; top:540px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p9" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:380px; top:500px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p10" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:50px; top:520px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p11" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:550px; top:530px; opacity:0.8; transition: top 2s ease;"></div>
+  
+  <div data-id="p5" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:120px; top:480px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p7" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:450px; top:510px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p8" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:250px; top:540px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p14" style="background: #0d3d96ff; width:30px; height:30px; border-radius:50%; position:absolute; left:300px; top:490px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p12" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:400px; top:20px; opacity:0.8; transition: top 2s ease;"></div>
+
+  <div data-id="p6" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:280px; top:50px; opacity:0.8; transition: top 2s ease;"></div>
+  <div data-id="p13" style="background: #af1212ff; width:30px; height:30px; border-radius:50%; position:absolute; left:20px; top:20px; opacity:0.8; transition: top 2s ease;"></div>
+
+  <div class="fragment" data-fragment-index="2" style="position:absolute; right: -90px; top: 110px; display:flex; flex-direction:column; align-items:center;"><div style="font-size: 2em; color: #EB811B; font-weight:bold; margin-bottom: -10px;">$\vec{J}$</div><svg width="40" height="350" viewBox="0 0 40 350" style="overflow: visible;"><defs> <marker id="arrowhead-orange" markerWidth="8" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#EB811B"/></marker></defs><line x1="20" y1="0" x2="20" y2="345"stroke="#EB811B" stroke-width="3" marker-end="url(#arrowhead-orange)"/></svg>
+  </div>
+  
+</div>
+
+:::
+
+::: {.column width="50%"}
+
+::: {class="fragment" data-fragment-index="1" style="margin-top: 0px; margin-left:-50px;font-size: 0.85em;"}
+
+* $\vec{B}$ aligns all spins ($\downarrow$)
+* **Left-handed**: $\vec{p}\parallel -\vec{s}$ → move **Down**
+* **Right-handed**: $\vec{p}\parallel \vec{s}$ → move **Up**
+
+Net motion is dominated (e.g.) by **Left-handed** fermions 
+:::
+
+::: {class="fragment" data-fragment-index="2" style="background: rgba(235, 129, 27, 0.1); padding: 15px; border-left: 5px solid #EB811B; margin-top: 30px; font-size: 0.85em;"}
+<!--**Result:**-->
+
+A chiral imbalance ($\small N_5 \neq 0$) together with $\vec{B}$ produces a CME current **opposite** to $\vec{B}$:
+
+$$
+\vec{J}_{\text{CME}} \propto N_5 \,\vec{B}
+$$
+:::
+
+
+
+
+:::
+
+
+::: {class="fragment" style="font-size:1.0em; font-style:italic; color:gray; margin-top:-210px; margin-left:48%; text-align:left;"}
+Intense ongoing experimental efforts  to detect <br > CME currents at heavy-ion colliders RHIC and LHC 
+:::
+
+::::::
+<!-- Because sphalerons occur with equal probability of positive/negative \Delta Q_{\text{top}}, the CME current is locally directional but globally averages to zero unless CP violation or dynamics bias the sign.-->
+
+
+
+## 2) Axion Cosmology & Sphalerons
+
+::: {class="fragment" data-fragment-index="1" style="margin-bottom: 30px; border-left: 5px solid #EB811B; padding-left: 15px; background: rgba(235, 129, 27, 0.05);"}
+**The Axion:** <br>A pseudo-Goldstone boson proposed to solve the **Strong CP Problem**
+ and also a leading **Dark Matter** candidate.
+:::
+
+::: {class="fragment" data-fragment-index="2"}
+**Thermal Production:**<br>
+Early Universe ($\small T \sim T_c \div 10 T_c$) → axions  produced via hadronic scatterings:
+$$\small \pi + \pi \to a + a $$
+:::
+
+::: {class="fragment" data-fragment-index="3" style="margin-top: 5px; font-size: 0.9em;"}
+The axion relic abundance is governed by the **Boltzmann Equation** [cite: 81-82]:
+$$ \small \frac{df_{\vec{p}}}{dt} = (1+f_{\vec{p}})\Gamma_{a}^{(+)} - f_{\vec{p}}\Gamma_{a}^{(-)} $$
+:::
+
+::: {class="fragment" data-fragment-index="4" style="margin-bottom: 10px; border-left: 5px solid rgba(4, 41, 110, 0.84); padding-left: 15px; background: rgba(13, 61, 150, 0.04);"}
+**The Key Input:**
+The interaction rates $\Gamma_a$ are realted to the **Sphaleron Rate**[cite: 84]:
+
+<div style="font-size: 1.1em; text-align:center; color: #0c2344; font-weight:bold; margin-top:-20px;">
+$$ \small \Gamma_a^{(-)}=e^{E/T}\; \Gamma_a^{(+)}=\frac{\Gamma_{\text{sphal}}}{2 E f_a^2} $$
+</div>
+:::
+
+<!--
+$\Rightarrow$ A precise lattice determination of **$\Gamma_{\text{sphal}}$** is essential to constrain the **Cosmic Axion Background**.
+-->
+
+## From Real Time to Euclidean Time 
+<div style="margin-bottom: 20px;">
+  The Sphaleron Rate is a <span style="color: #EB811B; font-weight:bold;">Real-Time</span> Transport Coefficient:
+  $$ \Gamma_{\text{sphal}} = \int dt\, d^3x~ \langle q(\vec{x}, t)\, q(\vec{0}, 0)\rangle_T $$
+</div>
+
+::: {class="fragment fade-in" data-fragment-index="2" style="margin-top: 30px;"}
+But lattice simulations live in **Euclidean time** ($t \to -i\tau$):
+$$ 0 \le \tau \le 1/T $$
+:::
+
+::: {class="fragment fade-in" data-fragment-index="3"}
+We measure the **Euclidean Correlator** (spatially integrated):
+$$ G_E(\tau) = \int d^3x \, \langle q(\vec{x}, \tau)\, q(\vec{0}, 0)\rangle $$
+:::
+
+::: {class="fragment fade-in" data-fragment-index="4" style="margin-top: 30px; margin-left:320px; color: gray; font-style: italic; text-align: center;"}
+[**The Challenge:**]{style="color: #EB811B ;"}<br> How to recover dynamic transport $\Gamma_{\mathrm{sphal}}$ from lattice data $G_E(\tau)$?
+:::
+
+
+## Spectral Representation {auto-animate=true}
+
+Spectral Decomposition of Euclidean Correlators
+
+$$
+G(\tau)
+= -\int_0^\infty \frac{d\omega}{\pi}~ K(\tau,\omega)\,\rho(\omega)
+$$
+
+## Spectral Representation {auto-animate=true}
+
+Spectral Decomposition of Euclidean Correlators
+
+$$
+G(\tau)
+= -\int_0^\infty \frac{d\omega}{\pi}~ K(\tau,\omega)\, {\color{#EB811B}\rho(\omega)}
+$$
+
+
+## Spectral Representation {auto-animate=true}
+
+Spectral Decomposition of Euclidean Correlators
+
+$$
+G(\tau)
+=- \int_0^\infty \frac{d\omega}{\pi}~ { K(\tau,\omega)}\,{\color{#EB811B}\rho(\omega)}
+$$
+
+with the thermal Laplace basis
+
+$$\small K(\tau,\omega)= \frac{\cosh\!\left(\omega(\tau-\tfrac{1}{2T})\right)} {\sinh\!\left(\tfrac{\omega}{2T}\right)} $$
+
+:::columns
+:::column
+::: {class="fragment"}
+The **spectral function** encodes:
+
+* excitations at finite $\omega$  
+* **transport** from its behaviour at $\small \omega \to 0$
+:::
+:::
+:::column
+::: {class="fragment"  style="margin-bottom: 0px; border-left: 5px solid #EB811B; padding-left: 15px; background: rgba(235, 129, 27, 0.05);"}
+* **For the Sphaleron Rate:** []
+<div style="font-size: 1.1em; text-align:center;margin-left:100px;font-weight:bold; margin-top:-10px;">
+$$\small \Gamma_{\text{sphal}}=\lim_{\omega\to 0}\frac{2T}{\omega}\,\rho(\omega)$$
+</div>
+:::
+:::
+:::
+
+## The Inverse Problem: A Mathematical Wall 
+
+## The Inverse Problem: A Mathematical Wall {auto-animate=true}
+
+<div style="margin-top: 20px; border: 2px solid #666; padding: 0px; border-radius: 15px;">
+  $$ G_E({\color{ #EB811B}\tau_i}) =- \int_0^\infty \frac{d\omega}{\pi} \, K({\color{ #EB811B}\tau_i}, \omega) \, \rho(\omega) $$
+</div>
+
+::: columns
+::: {.column width="50%"}
+
+
+<div style="margin-top: 30px; font-size: 0.9em;">
+**Input from the Lattice:**
+
+* Finite set of points: $N_\tau \sim \mathcal{O}(10-20)$
+* Noisy data: $G_E(\tau_i) \pm \sigma_i$
+</div>
+:::
+
+::: {.column width="50%"}
+<div class="fragment" style="margin-top: 30px; font-size: 0.9em;">
+**The Unknown (Physics):**
+
+* Continuous function $\rho(\omega) = \mathcal{L}^{-1}\{G_E\}(\omega)$
+* Infinite degrees of freedom
+</div>
+
+:::
+:::
+
+<div class="fragment" style="margin-top: 40px; border-left: 5px solid #EB811B; padding-left: 20px; padding-top: 5px; padding-bottom: 10px; background: #ec811d1f;">
+  <strong style="color:#EB811B">The Problem:</strong><br>
+  This is a **Fredholm Integral Equation of the 1st Kind** ⇒ **Ill-Posed**.<br>
+   An infinite number of solutions $\rho(\omega)$ can fit the discrete data within error bars.
+</div>
+
+## Discretization & Mock Tests
+<div style="text-align:center; margin-top:-20px;">
+Synthetic Data ⇒ $G(\tau _i) = \sum _j K(\tau _i, \omega _j) \rho (\omega _j)$
+</div>
+<img class="fragment" src="mock2/catastrophe_forward.svg" width="100%" style="margin-top:-40px;">
+<img class="fragment" src="mock2/illposed_kernel_svd.svg" width="100%" style="margin-top:-40px;">
+
+## Direct Inversion: a Catastrophe!
+<div style="text-align:center; margin-top:-10px;">
+**Naive inversion:**  &nbsp;  ${\rho} \sim K^{-1}\, G$
+</div>
+
+<img src="mock2/catastrophe_inverse.svg" style="width:100%; margin-top:-40px;"/>
+
+
+
+
+
+<!--
+<div style="font-size: 0.8em; margin-top: 0px;">
+
+  * **Singular values $\sigma_i$ collapse**  → the effective rank of $K$ is tiny.
+  * **Noise amplification:**  small $\sigma_i$ imply $1/\sigma_i$ grows huge  
+    → even $1\%$ noise in $G_E$ becomes $\mathcal{O}(100\%)$ in $\rho$.
+  * **Pathologies:**  large oscillations, overshoots, negative spikes — pure numerical artefacts.
+  * **Non-uniqueness:**  many different $\rho(\omega)$ reproduce the same $G_E(\tau)$ within errors.
+
+  <br>
+
+  *Pointwise reconstruction of $\rho(\omega)$ is mathematically unstable → the inverse problem is ill-posed.*
+</div>
+-->
+<div class="fragment" style="margin-top: 15px; border-top: 2px solid #EB811B; padding-top: 10px; text-align: center;">
+  To overcome ill-posedness, we must abandon pointwise reconstruction.<br>
+We instead target a <strong>smeared spectral density</strong> using a <strong>regularized estimator</strong> that suppresses noise amplification.
+</div>
+
+## Breaking the Wall: 1.Smearing
+
+<div style="margin-bottom: 20px;">
+  Sharp features $\rho(\omega)$ cannot be reconstructed →
+  <span style="color: #EB811B; font-weight:bold;">Smeared Spectral Density</span>:
+</div>
+
+$$
+\frac{\bar{\rho}_\sigma(\bar{\omega})}{\bar \omega}
+= 
+\int_0^\infty d\omega \,
+\Delta_\sigma(\bar{\omega}, \omega) \,
+\frac{\rho(\omega)}{\omega}
+$$
+
+::: {class="fragment" style="margin-top: 30px;"}
+Here $\Delta_\sigma$ is a **target smearing kernel** which replaces the ideal $\delta(\omega-\bar\omega)$ that we cannot resolve.
+:::
+
+::: {class="fragment" style="margin-top: 30px; border-left: 5px solid #EB811B; padding-left: 15px;"}
+**The HLT Strategy:**  
+Rather than solving directly for $\rho(\omega)$, we determine coefficients $g_\tau(\bar\omega)$ such that
+<!--
+We approximate the smeared rate $\bar{\rho}$ as a linear combination of the measured Euclidean correlators
+and linearity of the integral implies
+-->
+$$
+\Delta_\sigma(\bar{\omega},\omega) 
+\approx 
+\sum_{\tau=t_{\mathrm{min}}}^{N_\tau/2} g_\tau(\bar{\omega}) \, K(\tau, \omega).
+$$
+
+Then the smeared estimator becomes:
+
+$$
+\boxed{
+\;\bar{\rho}_\sigma(\bar{\omega})
+\;\approx\;
+\sum_{\tau=t_{\mathrm{min}}}^{N_\tau/2} g_\tau(\bar{\omega})\, G_E(\tau)
+}
+$$
+:::
+
+
+## Smearing Mock Test
+
+<div class="fragment" data-fragment-index="2" style="font-size: 0.85em; margin-top: 10px; border-left: 4px solid #EB811B; padding-left: 15px; background: rgba(235, 129, 27, 0.05); margin-top:-20px;">
+
+<!--
+**Unregularized Reconstruction:**
+$\Delta$ tries to perfectly mimic $\delta(\omega)$ $\Rightarrow$ leads to wild oscillations, negative regions, and explosive coefficients $|g|$.
+-->
+**The Trade-off:**
+
+* **Narrower target $\sigma$** $\Rightarrow$ sharper $\Delta$ but $\|g\| \uparrow$ explodes.
+* **Broader $\sigma$** $\Rightarrow$ stable $\Delta$, reduced variance, but poorer resolution.
+* **Goal:** Need optimal $\sigma$ + damping ($\lambda$ reg.) to balance width vs. noise.
+
+
+
+</div>
+<div style="margin-top:-30px;">
+<img class="fragment" data-fragment-index="1" src="mock3/Delta_g_unreg_combo.svg" style="width:100%; "/>
+</div>
+
+<div class="fragment" style="margin-top: 15px; border-top: 2px solid #EB811B; padding-top: 10px; text-align: center;">
+  We now introduce regularization [(**Modified Backus–Gilbert / HLT**)]{style="color: #EB811B;"} to set $\sigma$ and suppress unstable modes.
+</div>
+
+
+## the HLT functional
+<div style="text-align:center;margin-top:-20px; margin-bottom: 0px; font-size: 1.1em;">
+  We determine the coefficients $g_\tau(\bar\omega)$ by minimizing the functional:
+  
+  $$W_\lambda[g] = (1-\lambda) A[g] + \lambda B[g]$$
+</div>
+
+::: columns
+::: column 
+:::{class="fragment"}
+<div style="border: 1px solid #444; padding: 15px; border-radius: 10px; background: rgba(255,255,255,0.05);">
+<div style="text-align:center; color: #EB811B; font-weight:bold; margin-bottom:10px;">
+1. Resolution Error (Bias)
+</div>
+  
+$$A[g] = \int_{0}^\infty d\omega \, \left[ \Delta(\omega) - \delta_\sigma(\omega) \right]^2 e^{2\omega}$$
+  
+* Penalizes deviations from the **target** $\delta_\sigma$.
+* Enforces the correct "smearing shape."
+</div>
+
+:::
+
+:::
+
+::: column 
+::: {class="fragment"}
+<div style="border: 1px solid #444; padding: 15px; border-radius: 10px; background: rgba(255,255,255,0.05);">
+<div style="text-align:center; color: #EB811B; font-weight:bold; margin-bottom:10px;">
+2. Statistical Error (Variance)
+</div>
+
+$$B[g] = \mathbf{g}^T \cdot \mathbf{Cov} \cdot \mathbf{g}$$
+  
+* Penalizes the **variance** of the estimator due to data noise.
+* Reduces explosion of coefficients $g_\tau$.
+
+</div>
+:::
+
+:::
+
+:::
+
+<div class="fragment" style="margin-top: 30px; text-align: center;">
+  The parameter $\lambda \in [0, 1)$ controls the trade-off. <br>
+  <span style="font-size: 0.8em; color: gray;">(Unlike standard Backus-Gilbert, we fix $\sigma$ as an input and scan $\lambda$ for stability.)</span>
+</div>
+
 ---
+
+## The last Mock test
+
+<!--
+Small λ ⇒ sharp Δ, large oscillatory gτ (noise amplification).
+Increasing λ damps high‑variance directions; gτ magnitudes collapse.
+Color encodes λ; smooth decay shows progressive regularization.
+
+-->
+
+<div style="margin-top:-30px;">
+<img class="fragment" data-fragment-index="1" src="mock5/lambda_scan_combo.svg" style="width:100%; "/>
+</div>
+
+<div style="margin-top:-35px;"></div>
+
+::: columns
+::: {.column width="52%"}
+<div class="fragment" data-fragment-index="2" style="font-size: 0.75em; border-left: 3px solid #1d316dff; padding-left: 10px;">
+ <div style="text-align:left; font-size:1.3em;">**Coefficients $\small g_\tau(\lambda)$ : **</div>
+  
+  * **Small $\lambda$ → unstable:**<br> 
+      <em style="color:gray;font-weight:400;">Coefficients explode to minimize bias ↔$A$.</em>
+  * **Large $\lambda$ → stable:**<br>
+   <em style="color:gray;font-weight:400;">Coefficients are damped to minimize variance ↔$B$.</em>
+</div>
+:::
+
+::: {.column width="48%"}
+<div class="fragment" data-fragment-index="3" style="font-size: 0.75em; border-left: 3px solid #b20f0fff; padding-left: 10px;">
+  <div style="text-align:left; font-size:1.3em;">**Stability analysis: **</div>
+  
+  * **Small $\lambda$:** <br>
+  <em style="color:gray ;font-weight:400;">Statistical error explodes (noise amplification).</em>
+  * **Large $\lambda$:** <br>
+  <em style="color:gray ; font-weight:400;">Systematic error dominates (poor resolution).</em>
+  
+</div>
+:::
+:::
+
+::: {class="fragment fade-in" data-fragment-index="4" style="margin-top: 10px; margin-left:0px; color: gray; font-style: italic; text-align: center;"}
+[**The Sweet Spot:**]{style="color: #EB811B ;"}<br> 
+We pick the result on the **plateau** where the value stabilizes <br>before the noise takes over.
+:::
+
+## The HLT Algorithm: A Recipe
+
+<div class = "fragment" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 5px solid #EB811B; margin-top:-5px;">
+  **Input:** Euclidean Correlator $G_E(\tau)$ with covariance matrix.
+</div>
+
+<div style="margin-left: 20px; margin-top: 20px; font-size: 0.9em;">
+  <ol>
+    <li class="fragment">**Choose a Target Resolution $\sigma$:** <br> Fix the physical width of the desired smearing $\delta_\sigma(\omega)$:
+    
+
+  $$\small \left(\frac{2}{\sigma \pi}\right) \frac{\omega}{\sinh(\omega/\sigma)} \xrightarrow{\sigma \to 0} \delta(\omega) $$
+    <li class="fragment">**Scan the Regularization $\lambda$:** <br> Minimize $W_\lambda[g]$ for $\lambda \in [0, 1)$: $$ W_\lambda[g] = (1-\lambda) {A[g]} + \lambda B[g]$$</li>
+  </li>
+    
+
+    <li class="fragment">**Identify the Stability Plateau:** <br> Plot $\Gamma_\lambda$ vs.  $d=\sqrt{A[g({\color{#EB811B}\lambda})]/A[0]}$ and find the region where systematics and statistics equilibrate.</li>
+    <li class="fragment">**Repeat for multiple $\sigma$:** <br>Eventually extrapolate $\sigma \to 0$ </li>
+  </ol>
+</div>
+
+## Lattice Calculation: Extracting the Signal
+
+<div style="text-align:center; margin-bottom: 20px;">
+  To measure topological fluctuations, we must suppress UV noise.
+</div>
+
+::: columns
+::: {.column width="50%"}
+<div style="font-size: 0.92em; margin-top: 10px;">
+  **The Observable:**
+  $$ G_L(\tau) = \sum_{\vec{x}} \langle q_L(\vec{x}, \tau) q_L(\vec{0}, 0) \rangle $$
+  
+  * **The Problem:** <br>
+  Standard lattice topological charge is dominated by UV fluctuations $\mathcal{O}(1/a)$
+  * **The Solution:**<br> Smooth Gauge links (e.g. via Gradient Flow or **Cooling**).
+</div>
+:::
+
+::: {.column width="50%"}
+<div style="text-align:center; border: 1px dashed gray; padding: 10px; border-radius: 10px;">
+<img src="continuum_vs_tT_with_double_extrapolation_band.svg" style="width:100%;">
+<div style="font-size: 0.7em; color: gray;">
+Smoothing reveals the topological signal but distorts short distances.
+</div>
+</div>
+
+:::
+:::
+
+<div class="fragment" style="margin-top: -40px; border-left: 4px solid #af1212ff; padding-left: 15px; font-size: 0.94em;">
+  **Artifacts:** <br>Smoothing introduces a new scale $R_s \propto \sqrt{n_{\text{cool}}}$.<br>
+  <em style="color:#af1212ff">We must remove this dependence to recover physical results.</em>
+</div>
+
+## Baseline: Zero-Momentum Results
+
+<div style="text-align:center; margin-top:-10px; margin-bottom: 20px;">
+  Recent determination in full $N_f = 2+1$ QCD at physical point.
+</div>
+
+::: columns
+::: {.column width="55%"}
+<img class="fragment" src="sphal_rate_vs_T_COMP_Tc_ans1_RD.svg" style="width:100%;">
+:::
+
+::: {.column width="45%"}
+<div class="fragment" style=" margin-top: -5px;">
+  **Key Findings:**
+  
+  * Determined for $T \in [200, 600]\;\mathrm{MeV}$
+  * **Unquenching effect:**<br> Full QCD rate is larger than pure gauge.
+  * **Scaling:** <br>
+    Fit to semiclassical-inspired ansatz:
+    $$
+    \frac{\Gamma_{\mathrm{sphal}}}{T^4} = \left [\frac{A_0}{\log(T^2/T_c^2)+A_1} \right]^C
+    $$
+  
+  * QGP electric **conductivity**: $\Gamma \sim T^2$
+
+  
+
+</div>
+:::
+:::
+<div style="-50px;"></div>
+<div class="fragment" style="border-top: 2px solid #EB811B; padding-top: 10px; color: #EB811B; font-weight:bold; text-align:center;">
+<div style="margin-top:-5px;"></div>
+But Axion physics requires $\Gamma(\vec{p})$!
+<div style="margin-top:-20px;"></div>
+<div style="color: #33474b;">
+$$
+\text{Axion abundance}\Leftrightarrow  \Gamma(E,p) = \int dt d^3x \; e^{ip_\mu x^\mu} \langle q(\vec{x},t) q(\vec{0},0) \rangle
+$$
+</div>
+</div>
+
+
+
+
+## New Frontier: Finite Momentum $\Gamma(p)$
+
+<div style="margin-bottom: 20px; text-align:center;">
+  We extend the calculation to **non-zero** spatial momentum $\vec{p}$.
+</div>
+
+::: columns
+::: {.column width="40%" class="fragment"}
+  <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid #444; text-align:center;">
+  <strong style="color:#1f77b4">The Observable</strong>
+  
+  Spatial Fourier Transform:
+  $$ Q_L^{\vec{p}}(n_t) = \sum_{\vec{n}} e^{i\vec{p}\cdot\vec{n}} q_L(n_t, \vec{n}) $$
+  
+  We compute the correlator:
+  $$ G^{\vec{p}}(\tau) = \langle Q_L^{\vec{p}}(\tau) Q_L^{-\vec{p}}(0) \rangle $$
+  </div>
+:::
+
+::: {.column width="60%"}
+  <div class="fragment" style="font-size: 1em; margin-top: 10px; padding-left: 15px;">
+
+<div style="margin-top:-10px;"></div>  
+
+  **Why?**
+<div style="margin-top:-5px;"></div>
+
+  * Essential for Axion thermal production rates.
+  * Probes the spatial structure of topological fluctuations.
+  
+<div style="margin-top:10px;"></div>  
+  **Methodology:**
+<div style="margin-top:-5px;"></div>
+
+* Pure SU(3) Gauge Theory
+* $T \simeq 1.24 \, T_c$
+* $AR=4$ with $N_t \in [12,14,16]$
+* **Rigorous Double Extrapolation.**
+</div>
+
+:::
+:::
+
+
+## Removing Artifacts: Double Extrapolation
+
+<div style="text-align:center; font-size: 0.9em; margin-bottom: 10px;">
+  We perform a precise chain of limits to isolate the physical signal.
+</div>
+
+::: columns
+::: {.column width="50%" class="fragment"}
+  <div style="text-align:center; font-size: 0.8em; font-weight:bold; color:#1f77b4;">Step 1: Continuum Limit ($a \to 0$)</div>
+  <img src="cont_ext.svg" style="width:100%; border:1px solid #ddd;">
+  <div style="font-size: 0.75em;text-align:center;">Scaling at fixed physical smoothing $r_s$.</div>
+:::
+
+::: {.column width="50%" class="fragment"}
+  <div style="text-align:center; font-size: 0.8em; font-weight:bold; color:#d62728;">Step 2: Zero-Smoothing ($n_{cool} \to 0$)</div>
+  <img src="zero_smooth_ext.svg" style="width:100%; border:1px solid #ddd;">
+  <div style="font-size: 0.75em; text-align:center;">Extrapolating residual smoothing effects to zero.</div>
+:::
+:::
+
+<div class="fragment" style="margin-top: 20px; text-align: center; font-size: 1em; color: gray; font-style: italic;">
+  This procedure is repeated for every momentum $\vec{p}$.
+</div>
+
+## Results: Momentum Suppression
+
+<div style="text-align:center; margin-bottom: 20px;">
+  The physical, double-extrapolated correlators $G^{\vec{p}}(\tau)$.
+</div>
+
+::: columns
+::: {.column width="60%"}
+  <img src="doub_ext_corr.svg" style="width:100%;">
+:::
+
+::: {.column width="40%"}
+  <div style="font-size: 1em; margin-top: 40px;">
+  **Observation:**
+  
+  * Strong suppression of the topological fluctuations as $p/T$ increases.
+  * For $p/T \sim 9$, the signal is suppressed by $\sim 30\%$.
+  
+  <div style="margin-top: 50px; border-left: 4px solid #EB811B; padding-left: 10px; font-size:0.9em">
+
+**Physical Implication:**<br>
+One might expect the transport rate $\Gamma(p)$ to simply follow this suppression.
+    <br><strong>But does it?</strong>
+
+  </div>
+  </div>
+:::
+:::
+
+
+## Inversion Result
+
+<div style="text-align:center; margin-top: -10px;">
+  Applying HLT inversion to the double-extrapolated correlators.
+</div>
+
+<div style="display:flex; justify-content:center; margin-top: 20px;">
+<div style="width: 70%; height: 350px; border: 2px dashed #EB811B; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+<img src="plot_sphaleron_rate.svg" style="width:100%;">
+</div>
+</div>
+
+<div style="font-size: 0.85em; margin-top: 20px; text-align:center;">
+  Performing the inversion of double-extrapolated correlator gives the same estimate of a double-extrapolated Sphaleron Rate:
+</div>
+
+$$
+\Gamma_\mathrm{sphal}^{\color{#EB811B}\mathrm{new}}= \qquad \mathrm{vs} \qquad \Gamma_\mathrm{sphal}=
+$$
+
+## Extension at finite $p$
+
+<div style="text-align:center; margin-top: 10px;">
+  HLT inversion example at $p/T = 3.14$ and fixed $\sigma/T \simeq 1.75$
+</div>
+
+
+<div style="display:flex; justify-content:center; margin-top: 30px;">
+<div style="width: 80%; height: 420px; border: 2px dashed #EB811B; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+<img src="plot_sphaleron_rate_mom.svg" style="width:100%;">
+</div>
+</div>
+
+
+
+## Extension at finite $p$
+
+<div style="text-align:center;">
+Full HLT reconstruction of $\Gamma(p)$ from the double-extrapolated correlators:
+</div>
+
+<img src="mom_dep_rate.svg" style="width:100%;">
+
+<div style="font-size: 0.9em; margin-top: 20px; border-left: 5px solid #EB811B; padding-left: 15px; background: rgba(235,129,27,0.1);">
+  <strong style="color:#EB811B;">Key Finding:</strong><br>
+  Contrary to the correlator suppression, the rate **grows** at low momentum ($p \lesssim \pi T$) and then saturates to a **plateau**.
+</div>
+
+
+## Extension at finite $p$
+
+<div style="text-align:center;">
+Comparison with determinations at **finite** $a$ and $R_s \sim \sqrt{n_\mathrm{cool}}$
+</div>
+<img src="comp_finite_smooth.svg" style="width:100%;">
+
+
+
+## Conclusions 
+
+<div style="font-size: 1em; margin-top: 20px;"></div>
+
+<div class="fragment">
+
+1. **The Inverse Problem:**
+    * Spectral reconstruction is ill-posed, but the **HLT (Backus-Gilbert)** strategy allows for a controlled determination of smeared spectral densities via stability analysis.
+</div>
+
+<div class="fragment">
+
+2. **Static Sphaleron Rate:**
+    * We performed a non-perturbative determination in **Full QCD** $N_f = 2+1$ varying the temperature in the range $T \in [200, 600]$ MeV.
+    * The results are consistent with a scaling law $\Gamma_{\text{sphal}} \sim T^2$.
+</div>
+
+<div class="fragment">
+
+3. **Finite Momentum (Novel Result):**
+    * First systematic study of the momentum dependence in the pure gauge sector.
+    * **Unexpected Behavior:** While correlators are suppressed, the physical rate $\Gamma (p)$ **increases** from the static limit before reaching a plateau.
+    * This provides a non-trivial input for Axion Boltzmann equations.
+
+</div>
+
+
+
+## Future Perspectives: High-$T$ & Charm
+
+<div style="text-align:center; margin-bottom: 20px;">
+  To constrain Axion cosmology, we must push to $T \sim 1 \div 5$ GeV.
+</div>
+
+::: columns
+::: {.column width="50%"}
+<div class="fragment" style="border: 1px solid #444; padding: 15px; border-radius: 10px; background: rgba(255,255,255,0.05); height:100%;">
+  <strong style="color:#EB811B; font-size: 1.1em; text-align:center;">1. The Algorithmic Frontier</strong>
+  
+  * **Challenge:** <br>High $T$ requires fine lattices <br> $a \lesssim 0.02\;\mathrm{fm}$  $\to$ **Topological Freezing**.
+  * **Solution:** <br> **PTBC** (Parallel Tempering on Boundary Conditions) + **Multi-canonical** algorithms.
+  * **Goal:**<br> Tunnel between topological sectors to restore ergodicity.
+</div>
+:::
+
+::: {.column width="50%"}
+<div class="fragment" style="border: 1px solid #444; padding: 15px; border-radius: 10px; background: rgba(255,255,255,0.05); height:100%;">
+  <strong style="color:#1f77b4; font-size: 1.1em;">2. The Physics Upgrade</strong>
+  
+  * **Requirement:** <br> At $T \gtrsim 1$ GeV, the **Charm quark** becomes dynamical.
+  * **Work in Progress:**<br> Production of **$N_f = 2+1+1$** ensembles with Staggered Fermions.
+  * **Novelty:** <br>Line of Constant Physics via **Screening Masses**.
+</div>
+:::
+:::
+
+<div class="fragment" style="margin-top: 30px; text-align:center; font-style:italic; color: gray;">
+  This combined algorithmic and physical setup will allow us to match the Lattice determination<br> with Perturbation Theory in the Early Universe regime.
+</div>
+
+# Thank you for your attention!
