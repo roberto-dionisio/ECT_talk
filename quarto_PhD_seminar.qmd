@@ -643,7 +643,7 @@ Net motion is dominated (e.g.) by **Left-handed** fermions
 ::: {class="fragment" data-fragment-index="2" style="background: rgba(235, 129, 27, 0.1); padding: 15px; border-left: 5px solid #EB811B; margin-top: 30px; font-size: 0.85em;"}
 <!--**Result:**-->
 
-A chiral imbalance ($\small N_5 \neq 0$) together with $\vec{B}$ produces a CME current **opposite** to $\vec{B}$:
+A chiral imbalance ($\small N_5 \neq 0$) together with $\vec{B}$ produces a CME current **opposite** to $\vec{B}$:[[1]]{color=gray}
 
 $$
 \vec{J}_{\text{CME}} \propto N_5 \,\vec{B}
@@ -657,7 +657,7 @@ $$
 
 
 ::: {class="fragment" style="font-size:1.0em; font-style:italic; color:gray; margin-top:-210px; margin-left:48%; text-align:left;"}
-Intense ongoing experimental efforts  to detect <br > CME currents at heavy-ion colliders RHIC and LHC 
+Intense ongoing experimental efforts  to detect <br > CME currents at heavy-ion colliders RHIC and LHC [[2]]{color=gray}
 :::
 
 ::::::
@@ -679,7 +679,7 @@ $$\small \pi + \pi \to a + a $$
 :::
 
 ::: {class="fragment" data-fragment-index="3" style="margin-top: 5px; font-size: 0.9em;"}
-The axion relic abundance is governed by the **Boltzmann Equation** [cite: 81-82]:
+The axion relic abundance is governed by the **Boltzmann Equation**: [[3]]{color=gray}
 $$ \small \frac{df_{\vec{p}}}{dt} = (1+f_{\vec{p}})\Gamma_{a}^{(+)} - f_{\vec{p}}\Gamma_{a}^{(-)} $$
 :::
 
@@ -760,7 +760,7 @@ The **spectral function** encodes:
 :::
 :::column
 ::: {class="fragment"  style="margin-bottom: 0px; border-left: 5px solid #EB811B; padding-left: 15px; background: rgba(235, 129, 27, 0.05);"}
-* **For the Sphaleron Rate:** []
+* **Kubo Formula:**[[3]]{color=gray}
 <div style="font-size: 1.1em; text-align:center;margin-left:100px;font-weight:bold; margin-top:-10px;">
 $$\small \Gamma_{\text{sphal}}=\lim_{\omega\to 0}\frac{2T}{\omega}\,\rho(\omega)$$
 </div>
@@ -862,7 +862,7 @@ Here $\Delta_\sigma$ is a **target smearing kernel** which replaces the ideal $\
 :::
 
 ::: {class="fragment" style="margin-top: 30px; border-left: 5px solid #EB811B; padding-left: 15px;"}
-**The HLT Strategy:**  
+**The HLT Strategy:**[[5]]{color=gray}  
 Rather than solving directly for $\rho(\omega)$, we determine coefficients $g_\tau(\bar\omega)$ such that
 <!--
 We approximate the smeared rate $\bar{\rho}$ as a linear combination of the measured Euclidean correlators
@@ -878,7 +878,7 @@ Then the smeared estimator becomes:
 
 $$
 \boxed{
-\;\bar{\rho}_\sigma(\bar{\omega})
+\;\frac{\bar{\rho}_\sigma(\bar{\omega})}{\bar \omega}
 \;\approx\;
 \sum_{\tau=t_{\mathrm{min}}}^{N_\tau/2} g_\tau(\bar{\omega})\, G_E(\tau)
 }
@@ -896,7 +896,7 @@ $\Delta$ tries to perfectly mimic $\delta(\omega)$ $\Rightarrow$ leads to wild o
 -->
 **The Trade-off:**
 
-* **Narrower target $\sigma$** $\Rightarrow$ sharper $\Delta$ but $\|g\| \uparrow$ explodes.
+* **Narrower target $\sigma$** $\Rightarrow$ sharper $\Delta$ but $\|g\|$ explodes.
 * **Broader $\sigma$** $\Rightarrow$ stable $\Delta$, reduced variance, but poorer resolution.
 * **Goal:** Need optimal $\sigma$ + damping ($\lambda$ reg.) to balance width vs. noise.
 
@@ -927,7 +927,7 @@ $\Delta$ tries to perfectly mimic $\delta(\omega)$ $\Rightarrow$ leads to wild o
 1. Resolution Error (Bias)
 </div>
   
-$$A[g] = \int_{0}^\infty d\omega \, \left[ \Delta(\omega) - \delta_\sigma(\omega) \right]^2 e^{2\omega}$$
+$$A[g] = \int_{0}^\infty d\omega \, \left[ \Delta(\omega)_\sigma - \delta_\sigma(\omega) \right]^2 e^{2\omega}$$
   
 * Penalizes deviations from the **target** $\delta_\sigma$.
 * Enforces the correct "smearing shape."
@@ -1036,7 +1036,7 @@ We pick the result on the **plateau** where the value stabilizes <br>before the 
 </div>
 
 ::: columns
-::: {.column width="50%"}
+::: {.column width="50%" class="fragment"}
 <div style="font-size: 0.92em; margin-top: 10px;">
   **The Observable:**
   $$ G_L(\tau) = \sum_{\vec{x}} \langle q_L(\vec{x}, \tau) q_L(\vec{0}, 0) \rangle $$
@@ -1047,7 +1047,7 @@ We pick the result on the **plateau** where the value stabilizes <br>before the 
 </div>
 :::
 
-::: {.column width="50%"}
+::: {.column class="fragment" width="50%"}
 <div style="text-align:center; border: 1px dashed gray; padding: 10px; border-radius: 10px;">
 <img src="continuum_vs_tT_with_double_extrapolation_band.svg" style="width:100%;">
 <div style="font-size: 0.7em; color: gray;">
@@ -1059,14 +1059,14 @@ Smoothing reveals the topological signal but distorts short distances.
 :::
 
 <div class="fragment" style="margin-top: -40px; border-left: 4px solid #af1212ff; padding-left: 15px; font-size: 0.94em;">
-  **Artifacts:** <br>Smoothing introduces a new scale $R_s \propto \sqrt{n_{\text{cool}}}$.<br>
+  **Artifacts:** <br>Smoothing introduces a new scale $R_s \propto \sqrt{n_{\text{cool}}}$.[[6]]{color=gray}<br>
   <em style="color:#af1212ff">We must remove this dependence to recover physical results.</em>
 </div>
 
 ## Baseline: Zero-Momentum Results
 
 <div style="text-align:center; margin-top:-10px; margin-bottom: 20px;">
-  Recent determination in full $N_f = 2+1$ QCD at physical point.
+  Recent determination in full $N_f = 2+1$ QCD at physical point.[[7]]{color=gray}
 </div>
 
 ::: columns
@@ -1086,7 +1086,7 @@ Smoothing reveals the topological signal but distorts short distances.
     \frac{\Gamma_{\mathrm{sphal}}}{T^4} = \left [\frac{A_0}{\log(T^2/T_c^2)+A_1} \right]^C
     $$
   
-  * QGP electric **conductivity**: $\Gamma \sim T^2$
+  * QGP electric **conductivity**: $\Gamma \sim BT^2$ [[8]]{color=gray}
 
   
 
@@ -1192,7 +1192,6 @@ $$
   **Observation:**
   
   * Strong suppression of the topological fluctuations as $p/T$ increases.
-  * For $p/T \sim 9$, the signal is suppressed by $\sim 30\%$.
   
   <div style="margin-top: 50px; border-left: 4px solid #EB811B; padding-left: 10px; font-size:0.9em">
 
@@ -1223,7 +1222,7 @@ One might expect the transport rate $\Gamma(p)$ to simply follow this suppressio
 </div>
 
 $$
-\Gamma_\mathrm{sphal}^{\color{#EB811B}\mathrm{new}}= \qquad \mathrm{vs} \qquad \Gamma_\mathrm{sphal}=
+\Gamma_\mathrm{sphal}^{\color{#EB811B}\mathrm{new}}=0.062(12) \qquad \mathrm{vs} \qquad \Gamma_\mathrm{sphal}= 0.060(15)
 $$
 
 ## Extension at finite $p$
@@ -1278,7 +1277,7 @@ Comparison with determinations at **finite** $a$ and $R_s \sim \sqrt{n_\mathrm{c
 
 2. **Static Sphaleron Rate:**
     * We performed a non-perturbative determination in **Full QCD** $N_f = 2+1$ varying the temperature in the range $T \in [200, 600]$ MeV.
-    * The results are consistent with a scaling law $\Gamma_{\text{sphal}} \sim T^2$.
+    *  We need higher temperatures to isolate a clear $T$ scaling.
 </div>
 
 <div class="fragment">
@@ -1304,7 +1303,7 @@ Comparison with determinations at **finite** $a$ and $R_s \sim \sqrt{n_\mathrm{c
   <strong style="color:#EB811B; font-size: 1.1em; text-align:center;">1. The Algorithmic Frontier</strong>
   
   * **Challenge:** <br>High $T$ requires fine lattices <br> $a \lesssim 0.02\;\mathrm{fm}$  $\to$ **Topological Freezing**.
-  * **Solution:** <br> **PTBC** (Parallel Tempering on Boundary Conditions) + **Multi-canonical** algorithms.
+  * **Solution:**  [*[<u>A. Giorgieri's talk on Thu.</u>]*]{color="gray" style="font-weight: 400;"} <br> **PTBC** (Parallel Tempering on Boundary Conditions) + **Multi-canonical** algorithms.
   * **Goal:**<br> Tunnel between topological sectors to restore ergodicity.
 </div>
 :::
@@ -1324,4 +1323,27 @@ Comparison with determinations at **finite** $a$ and $R_s \sim \sqrt{n_\mathrm{c
   This combined algorithmic and physical setup will allow us to match the Lattice determination<br> with Perturbation Theory in the Early Universe regime.
 </div>
 
+
+
 # Thank you for your attention!
+
+## References
+
+
+
+[[1]]{color=gray} Fukushima et al., Phys. Rev. D 78 (2008) 074033 [arXiv:0808.3382]  <br>           
+
+[[2]]{color=gray} Feng et al., Phys. Rev. Res. 7 (2025) 031001  <br>
+
+[[3]]{color=gray} Notari et al., Phys. Rev. Lett. 131 (2023) 1, 011004 [2211.03799]  <br>
+
+[[4]]{color=gray} Meyer EPJA 47 (2011) 86 – Lowdon PRD 106 (2022) 045028 <br>
+
+[[5]]{color=gray} Hansen, Lupo, Tantalo, Phys. Rev. D 99 (2019) 094508 [1903.06476]
+  <br>
+
+[[6]]{color=gray} Bonati, D’Elia, PRD 89 (2014) 105005 [1401.2441]  <br>
+
+[[7]]{color=gray} Bonanno et al., Phys. Rev. Lett. 132 (2024) 5, 051903 [arXiv:2308.01287]  <br>
+
+[[8]]{color=gray} Almirante et al. PRD 111 (2025) 034505 [arXiv:2406.18504]  <br>
