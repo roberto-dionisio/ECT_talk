@@ -927,7 +927,7 @@ $\Delta$ tries to perfectly mimic $\delta(\omega)$ $\Rightarrow$ leads to wild o
 1. Resolution Error (Bias)
 </div>
   
-$$A[g] = \int_{0}^\infty d\omega \, \left[ \Delta(\omega)_\sigma - \delta_\sigma(\omega) \right]^2 e^{2\omega}$$
+$$A[g] = \int_{0}^\infty d\omega \, \left[ \Delta_\sigma  (\omega) - \delta_\sigma(\omega) \right]^2 e^{2\omega}$$
   
 * Penalizes deviations from the **target** $\delta_\sigma$.
 * Enforces the correct "smearing shape."
