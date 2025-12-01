@@ -7,14 +7,6 @@ $primary-color: #0c2344;
   align-items: flex-start;
 }
 
-.reveal .quarto-title-author::after {
-  content: "PhD Supervisor: Massimo D'Elia";
-  display: block;
-  font-size: 0.7em;
-  color: gray;
-  margin-top: 0.2em;
-}
-
 .reveal .quarto-title-authors::after {
   content: "In collaboration with: C. Bonanno, M. D'Elia, G. Gagliardi, A. Giorgieri, F. Sanfilippo,   A. Valentino.";
   display: block;
